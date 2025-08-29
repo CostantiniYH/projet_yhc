@@ -1,14 +1,14 @@
 <?php
 // Gérer les chemins d'accès
-define('BASE_URL', '/projet_yhc/');
+define('BASE_URL', '/');
 
 // Connexion à la base de données
 function connect () {
     try {
 
         $dsn = "mysql:host=localhost;dbname=yhc";
-        $user = "root";
-        $passwd = "";
+        $user = "YHC";
+        $passwd = "Yaacov2790.";
 
         $pdo = new PDO($dsn, $user, $passwd);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
