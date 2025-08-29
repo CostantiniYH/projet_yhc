@@ -1,6 +1,6 @@
 <?php
 // Gérer les chemins d'accès
-define('BASE_URL', '/h');
+define('BASE_URL', '/');
 
 // Connexion à la base de données
 function connect () {
