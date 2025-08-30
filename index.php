@@ -110,24 +110,24 @@ $navbar->render();
             <area shape="rect" coords="0,0, 350,250" alt="Galerie" href="image.php">
             </map>
         </div>
-        <div class="col-md-4 mb-5 img-map img-index" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
-
+        <div class="mb-5 img-map img-index" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
             <div class="card-img-top card-img rounded-top">
                 <?php
                     $carousel = new Carousel();
 
                     $a = [];
-
-                    $files = glob('./uploads/' . $categorie['nom'] . '/*.{jpg}', GLOB_BRACE);
-                    foreach ($files as $file) {
-                        $fileName = basename($file, pathinfo($file, PATHINFO_EXTENSION));
-                        $text = ucwords(str_replace(['_', '-', '.'], ' ', $fileName));
-                        $a[] = [
-                            'link' => $file,
-                            'text' => $text
-                        ];
+                    foreach ($categories as $categorie) {
+                        $files = glob('./uploads/' . $categorie['nom'] . '/*.{jpg}', GLOB_BRACE);
+                        foreach ($files as $file) {
+                            $fileName = basename($file, pathinfo($file, PATHINFO_EXTENSION));
+                            $text = ucwords(str_replace(['_', '-', '.'], ' ', $fileName));
+                            $a[] = [
+                                'link' => $file,
+                                'text' => $text
+                            ];
+                        }
                     }
-                    $carousel->Read($a, $categorie['id']);
+                    $carousel->Read($a, 2);
                 ?>
             </div>
             <map name="map<?= $categorie['id']; ?>">

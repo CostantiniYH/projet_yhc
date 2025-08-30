@@ -174,7 +174,7 @@ $navbar->render();
         </table>
     </div>
     <div class="mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">
-        <h1 class="fs-2">Table images</h1>
+        <h1 class="fs-2">Table galerie</h1>
         <table class="table mt-2">
             <tr>
                 <th>ID</th>
