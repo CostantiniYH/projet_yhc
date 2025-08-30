@@ -1,13 +1,13 @@
 <?php
 
 class Carousel {
-    private function Image($array, $carouselId) {
+    private function Image($array) {
         $html = '';
         foreach ($array as $key => $a) {
             $html .= '
                 <div class="carousel-item ' . ($key == 0 ? 'active' : '') . '">
                     <img loading="lazy" src="' . htmlspecialchars($a['link']) . '" 
-                    class="d-block w-100 img-carousel" alt="..." usemap="#map' . htmlspecialchars($carouselId) . '">
+                    class="d-block w-100 img-carousel" alt="..." usemap="#map' . htmlspecialchars($a['id']) . '">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>' . htmlspecialchars($a['text']) . '</h5>
                     </div>
@@ -42,7 +42,7 @@ class Carousel {
                     ' . $this->Indicators($a, $carouselId) . '
                 </div>
                 <div class="carousel-inner">
-                    ' . $this->Image($a, $carouselId) . '
+                    ' . $this->Image($a) . '
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#' . htmlspecialchars($carouselId) . '" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

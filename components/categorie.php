@@ -11,7 +11,8 @@
                 $text = ucwords(str_replace(['_', '-', '.'], ' ', $fileName));
                 $a[] = [
                     'link' => $file,
-                    'text' => $text
+                    'text' => $text,
+                    'id' => $categorie['id']
                 ];
             }
             $carousel->Read($a, $categorie['id']);

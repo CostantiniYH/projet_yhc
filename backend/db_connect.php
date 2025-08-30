@@ -1,6 +1,14 @@
 <?php
 // Gérer les chemins d'accès
-define('BASE_URL', '/');
+$host = $_SERVER['HTTP_HOST'];
+//$scriptName = dirname($_SERVER['SCRIPT_NAME']);
+
+if ($host === 'localhost') {
+    define('BASE_URL', '/projet_yhc/');
+} else {
+    define('BASE_URL', '/');
+}
+
 
 // Connexion à la base de données
 function connect () {
