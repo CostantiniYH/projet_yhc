@@ -33,24 +33,7 @@ $navbar->render();
 ?>
 
 <div class="container mt-2">
-    <?php if (isset($_GET['erreur'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['erreur']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['message']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['success']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php require_once __DIR__ . '/../components/alerts.php'; ?>
 
     <p class="mt-2 border border-2 border-success p-3 rounded mb-3">Vous êtes connecté en tant que <?php echo $user['email']; ?></p>
     <h1 class="shadow rounded p-4">Dashboard <?php echo $user['nom']; ?> <?php echo $user['prenom']; ?></h1>

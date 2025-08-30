@@ -48,24 +48,9 @@ $navbar->render() ;
 ?>
 
 <div class="container">
-<?php if (isset($_GET['erreur'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['erreur']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['message']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['success']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    
+    <?php require_once __DIR__ . '/components/alerts.php'; ?>
+
     <div class="row m-5 shadow-lg p-4 rounded-4 border-start border-top border-bottom border-primary border-3">
         <h1 class="">Produit</h1>
         <div class="col-12 m-4">
