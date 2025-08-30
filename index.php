@@ -92,26 +92,26 @@ $navbar->render();
         ?>
     </div>            
     <div class="row">
-        <div class="col-md-4  mb-5 img-map img-index" style="height: 300px; overflow: hidden;"  data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+        <div class="col-md-4  mb-5 img-map img-index" style="height: 200px; overflow: hidden;"  data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
             <img src="uploads/Produits/magasin.jpg" class="card-img rounded-4 shadow" alt="Produits" usemap="#produitMap">
             <map name="produitMap">
             <area shape="rect" coords="0, 0, 350,250" alt="Produits" href="produits.php">
             </map>
         </div>
-        <div class="col-md-4 mb-5 img-map img-index " style="height: 300px; overflow: hidden;" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+        <div class="col-md-4 mb-5 img-map img-index " style="height: 200px; overflow: hidden;" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
             <img src="uploads/Categories/categories.jpg" class="card-img rounded-4 shadow" alt="Categories" usemap="#categorieMap">
             <map name="categorieMap">
             <area shape="rect" coords="0,0, 350,250" alt="Categories" href="categories.php">
             </map>
         </div>
-        <div class="col-md-4 mb-5 img-map img-index" style="height: 300px; overflow: hidden;" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+        <div class="col-md-4 mb-5 img-map img-index" style="height: 200px; overflow: hidden;" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
             <img src="uploads/Galerie/galerie.jpg" class="card-img rounded-4 shadow" alt="Galerie" usemap="#galerieMap">
             <map name="galerieMap">
             <area shape="rect" coords="0,0, 350,250" alt="Galerie" href="image.php">
             </map>
         </div>
         <div class="mb-5 img-map img-index" style="height: 300px; overflow: hidden;" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
-            <div class="card-img-top card-img rounded-top">
+            <div class="card-img-top card-img rounded-4 shadow">
                 <?php
                     $carousel = new Carousel();
 
