@@ -90,7 +90,51 @@ $navbar->render();
             }
             $carousel->Read($a, 1);
         ?>
-    </div>                
+    </div>            
+    <div class="row">
+        <div class="col-md-4  mb-5 img-map img-index"  data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+            <img src="/uploads/magasin.jpg" class="card-img rounded-4 shadow" alt="Produits" usemap="#produitMap">
+            <map name="produitMap">
+            <area shape="rect" coords="0, 0, 350,250" alt="Produits" href="produits.php">
+            </map>
+        </div>
+        <div class="col-md-4 mb-5 img-map img-index " data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+            <img src="/uploads/categories.jpg" class="card-img rounded-4 shadow" alt="Categories" usemap="#categorieMap">
+            <map name="categorieMap">
+            <area shape="rect" coords="0,0, 350,250" alt="Categories" href="categories.php">
+            </map>
+        </div>
+        <div class="col-md-4 mb-5 img-map img-index" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+            <img src="/uploads/galerie.jpg" class="card-img rounded-4 shadow" alt="Galerie" usemap="#galerieMap">
+            <map name="galerieMap">
+            <area shape="rect" coords="0,0, 350,250" alt="Galerie" href="image.php">
+            </map>
+        </div>
+        <div class="col-md-4 mb-5 img-map img-index" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="500">
+
+            <div class="card-img-top card-img rounded-top" style="width: 20rem; height: 150px; overflow: hidden;">
+                <?php
+                    $carousel = new Carousel();
+
+                    $a = [];
+
+                    $files = glob('./uploads/' . $categorie['nom'] . '/*.{jpg}', GLOB_BRACE);
+                    foreach ($files as $file) {
+                        $fileName = basename($file, pathinfo($file, PATHINFO_EXTENSION));
+                        $text = ucwords(str_replace(['_', '-', '.'], ' ', $fileName));
+                        $a[] = [
+                            'link' => $file,
+                            'text' => $text
+                        ];
+                    }
+                    $carousel->Read($a, $categorie['id']);
+                ?>
+            </div>
+            <map name="map<?= $categorie['id']; ?>">
+                <area shape="rect" coords="0,0,350,200" href="<?= BASE_URL ?>produits.php?id=<?= $categorie['id']; ?>">
+            </map>
+        </div>
+    </div>    
 </div>
 <?php
 require_once __DIR__ . '/components/footer.php';

@@ -59,7 +59,10 @@ $navbar->render() ;
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
-<?php  $titre = findBy2 ($connect, 'nom, id', 't_categories', 'id', $id); ?>
+    
+    <?php  $titre = findBy2 ($connect, 'nom, id', 't_categories', 'id',
+     $id); ?>
+    
     <h1 class="mb-5 shadow rounded-4 border-start border-end border-2 border-success"> 
         <?php
             if (!empty($_GET['id'])) {
@@ -87,8 +90,10 @@ $navbar->render() ;
                 
                 foreach ($produits as $row => $value) {
                 ?>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-duration="2000" data-bs-toggle="tooltip" data-bs-placement="top" title="<?= $value['nom'] ?>">
-                        <?php require __DIR__ . '/components/card.php'; ?> </br>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-duration="2000" data-bs-toggle="
+                    tooltip" data-bs-placement="top" title="<?= $value['nom'] ?>">
+                        <?php require __DIR__ . '/components/card.php'; ?> 
+                        </br>
                     </div>
                 <?php 
                 }
