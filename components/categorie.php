@@ -1,5 +1,5 @@
 <div class="rounded-4 shadow text-center card border-0 hvr-shadow-radial">
-    <div class="card-img-top card-img rounded-top col-sm-12" style="width: 20rem; height: 150px; overflow: hidden;">
+    <div class="card-img-top card-img rounded-top" style="height: 150px; overflow: hidden;">
         <?php
             $carousel = new Carousel();
 
