@@ -31,13 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $categorieClean = preg_replace('/[^a-zA-Z0-9_-]/', '_', $categorie['nom']);
         $categorieDir = $uploadDir . $categorieClean . '/';
         $categorieUrl = $baseUrl . $categorieClean . '/';
-        
+        if (!is_writable(__DIR__ . '/../uploads')) {
+    die("Erreur : le dossier uploads n'est pas inscriptible par PHP !");
+}
+
         if (!is_dir($categorieDir)) {
             mkdir($categorieDir, 0775, true); // Crée le dossier de la catégorie avec les bonnes permissions
         }
         
         if (!is_dir($categorieDir) && !mkdir($categorieDir, 0775, true)) {
-            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier' . $categorieClean . '!');
+            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier ' . $categorieClean . '!');
             exit();
         }
 
