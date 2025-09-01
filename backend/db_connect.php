@@ -57,10 +57,11 @@ function getAll2 ($pdo, $table) {
     }
 }
 
-function getAllWhere ($pdo, $table, $champ, $param = []) {
+function getAllWhere ($pdo, $table, $condition, $param = []) {
     $pdo = connect();
     try {
-        $sql = "SELECT * FROM $table WHERE $champ";
+        $sql = "SELECT $table.*, c.nom AS nom_categorie FROM $table
+        INNER JOIN t_categories c ON $table.id_categorie = c.id WHERE $condition";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$param]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
