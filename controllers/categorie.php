@@ -18,15 +18,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $baseUrl = BASE_URL . 'uploads/';
 
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true); // Crée le dossier avec les bonnes permissions
+            mkdir($uploadDir, 0775, true); // Crée le dossier avec les bonnes permissions
         }
+
+        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+            die("Impossible de créer le dossier upload principal !");
+        }
+
+        
         
         $categorieClean = preg_replace('/[^a-zA-Z0-9_-]/', '_', $categorie['nom']);
         $categorieDir = $uploadDir . $categorieClean . '/';
         $categorieUrl = $baseUrl . $categorieClean . '/';
-
+        
         if (!is_dir($categorieDir)) {
-            mkdir($categorieDir, 0755, true); // Crée le dossier de la catégorie avec les bonnes permissions
+            mkdir($categorieDir, 0775, true); // Crée le dossier de la catégorie avec les bonnes permissions
+        }
+        
+        if (!is_dir($categorieDir) && !mkdir($categorieDir, 0755, true)) {
+            die("Impossible de créer le dossier de la catégorie !");
         }
 
         if (!file_exists($_FILES['image']['tmp_name'])) {
@@ -38,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $destination = $categorieDir . $fileName;
 
 
-        echo "UploadDir : $uploadDir<br>";
-echo "CategorieDir : $categorieDir<br>";
-echo "Destination : $destination<br>";
-echo "Dossier existe ? " . (is_dir($categorieDir) ? 'Oui' : 'Non') . "<br>";
-echo "Permissions : " . substr(sprintf('%o', fileperms($categorieDir)), -4);
-exit;
+        //echo "UploadDir : $uploadDir<br>";
+        //echo "CategorieDir : $categorieDir<br>";
+        //echo "Destination : $destination<br>";
+        //echo "Dossier existe ? " . (is_dir($categorieDir) ? 'Oui' : 'Non') . "<br>";
+        //echo "Permissions : " . substr(sprintf('%o', fileperms($categorieDir)), -4);
+        //exit;
 
         if ($upload->moveTo($destination)) {
             echo "Fichier uploadé avec succès ! <br>";
