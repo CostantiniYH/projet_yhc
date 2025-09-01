@@ -90,9 +90,9 @@ function deleteUser($pdo, $id) {
         'galerie'     => $link_i,
     ];
 
-    $categories = findAll($pdo = connect(), 't_categories');
-    $produits = findAll2($pdo, 't_produits');
-    $images = findAll2($pdo, 't_images');
+    $categories = getAll($pdo = connect(), 't_categories');
+    $produits = getAll2($pdo, 't_produits');
+    $images = getAll2($pdo, 't_images');
 
     $tables = [
         'catégories' => $categories,

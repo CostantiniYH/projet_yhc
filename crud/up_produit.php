@@ -6,7 +6,7 @@ require_once __DIR__ . '/../class/navbar.php';
 
 require_login();
 $connect = connect(); 
-$categories = findAll($connect, 't_categories');
+$categories = getAll($connect, 't_categories');
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID invalide.");

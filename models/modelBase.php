@@ -26,7 +26,7 @@ function findBy2($pdo, $element, $table, $champ, $id) {
     }
 }
 
-function findAll($pdo, $table) {
+function getAll($pdo, $table) {
     $pdo = connect();
     try {
         $sql = "SELECT * FROM $table";

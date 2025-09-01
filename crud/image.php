@@ -12,8 +12,8 @@ if (isLoggedIn()) {
 }
 
 $pdo = connect();
-$categories = findAll($pdo, 't_categories');
-$images = findAll($pdo, 't_images');
+$categories = getAll($pdo, 't_categories');
+$images = getAll($pdo, 't_images');
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;
 

@@ -19,15 +19,15 @@ if (isAdmin()) {
 
 $connect = connect();
 
-$user = findAll($connect, 't_users');
-$categorie = findAll($connect, 't_categories');
-//$produit = findAll2($connect, 't_produits');
+$user = getAll($connect, 't_users');
+$categorie = getAll($connect, 't_categories');
+//$produit = getAll2($connect, 't_produits');
 $sql = "SELECT p.*, c.nom AS nom_categorie FROM t_produits p
  INNER JOIN t_categories c ON p.id_categorie = c.id WHERE deleted_at IS NULL";
 $stmt = $connect->prepare($sql);
 $stmt->execute([]);
 $produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$image = findAll2($connect, 't_images');
+$image = getAll2($connect, 't_images');
 
 if (!isset($_SESSION['user'])) {
     die("Erreur : utilisateur non connecté.");

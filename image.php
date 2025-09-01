@@ -6,7 +6,7 @@ require_once __DIR__ . '/class/navbar.php';
 require_once __DIR__ . '/class/carousel.php';
 
 $connect = connect();
-$image = findAll($connect, 't_images');
+$image = getAll($connect, 't_images');
 
 
 $navbar = new Navbar();

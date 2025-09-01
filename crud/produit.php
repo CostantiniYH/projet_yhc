@@ -8,8 +8,8 @@ require_once __DIR__ . '/../class/carousel.php';
 require_login();
 
 $pdo = connect();
-$categories = findAll($pdo, 't_categories');
-$produits = findAll($pdo, 't_produits');
+$categories = getAll($pdo, 't_categories');
+$produits = getAll($pdo, 't_produits');
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;  // Sécurisation
 

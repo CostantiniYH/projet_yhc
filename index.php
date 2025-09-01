@@ -54,7 +54,7 @@ $navbar->render();
         <?php
             $pdo = connect();
             
-            $categories = findAll ($pdo, 't_categories');
+            $categories = getAll ($pdo, 't_categories');
             
             $carousel = new Carousel();
             

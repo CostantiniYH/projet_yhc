@@ -12,7 +12,7 @@ if (!isAdmin()) {
 }
 
 $pdo = connect();
-$categories = findAll($pdo, 't_categories');
+$categories = getAll($pdo, 't_categories');
 
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;

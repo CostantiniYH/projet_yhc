@@ -14,16 +14,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $upload = new Upload($_FILES['image']);
 
     if ($upload->validate()) {
-        $uploadDir = '' . BASE_URL . 'uploads/';
+        $uploadDir = __DIR__ . '/../uploads/';
+        $baseUrl = BASE_URL . 'uploads/';
+
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true); // Crée le dossier avec les bonnes permissions
+            mkdir($uploadDir, 0755, true); // Crée le dossier avec les bonnes permissions
+        }
+        
+        $categorieDir = $uploadDir . $categorie['nom'] . '/';
+        $categorieUrl = $baseUrl . $categorie['nom'] . '/';
+
+        if (!is_dir($categorieDir)) {
+            mkdir($categorieDir, 0755, true); // Crée le dossier de la catégorie avec les bonnes permissions
         }
 
         if (!file_exists($_FILES['image']['tmp_name'])) {
             die("Erreur : le fichier temporaire n'existe pas.");
         }
 
-        $destination = $uploadDir . basename($_FILES['image']["name"]);
+        $fileName = uniqid('img_') . '.' . basename($_FILES['image']['name']);
+        $destination = $categorieDir . $fileName;
 
         if ($upload->moveTo($destination)) {
             echo "Fichier uploadé avec succès ! <br>";

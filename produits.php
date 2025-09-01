@@ -6,7 +6,7 @@ require_once __DIR__ . '/class/navbar.php';
 require_once __DIR__ . '/class/carousel.php';
 
 $connect = connect ();
-$produits = findAll2 ($connect, 't_produits');
+$produits = getAll2 ($connect, 't_produits');
 $id = $_GET['id'] ?? null;
 
 $navbar = new Navbar();
