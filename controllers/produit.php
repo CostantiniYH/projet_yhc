@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $upload = new Upload($_FILES['image']);
     if ($upload->validate()) {
-        $uploadDir = '' . BASE_URL . 'uploads/';
+        $uploadDir = __DIR__ . 'uploads/';
+        $baseUrl = BASE_URL . 'uploads/';
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true); // Crée le dossier avec les bonnes permissions
         }
@@ -32,9 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Chemin du fichier : " . $upload->getFilePath();
         } else {
             echo "Erreur lors du déplacement du fichier : " . implode(', ', $upload->getError());
+            exit();
         }
     } else {
         echo "Erreur de validation : " . implode(', ', $upload->getError());
+        exit();
     } 
 
     $pdo = connect();

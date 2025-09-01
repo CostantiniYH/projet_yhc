@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
-            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier uploads principal !');
+            header('Location: ' . BASE_URL . ' crud/categorie.php?erreur=Impossible de créer le dossier uploads principal !');
             exit();
         }
 
