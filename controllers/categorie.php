@@ -36,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         
         if (!is_dir($categorieDir) && !mkdir($categorieDir, 0775, true)) {
-            die("Impossible de créer le dossier de la catégorie !");
+            header('Location: ' . BASE_URL . ' crud/categorie.php?=Impossible de créer le dossier de la catégorie !');
         }
 
         if (!file_exists($_FILES['image']['tmp_name'])) {
-            header('Location: ' . BASE_URL . ' crud/categorie.php?=Erreur : le fichier temporaire n\'existe pas.');
+            die("Erreur : le fichier temporaire n'existe pas.");
         }
 
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
