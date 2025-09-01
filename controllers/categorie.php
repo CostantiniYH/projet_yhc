@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
-            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier upload principal !');
+            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier uploads principal !');
             exit();
         }
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         
         if (!is_dir($categorieDir) && !mkdir($categorieDir, 0775, true)) {
-            header('Location: ' . BASE_URL . ' crud/categorie.php?=Impossible de créer le dossier de la catégorie !');
+            header('Location: ' . BASE_URL . ' crud/categorie.php?erreur=Impossible de créer le dossier' . $categorieClean . 'de la catégorie !');
             exit();
         }
 
