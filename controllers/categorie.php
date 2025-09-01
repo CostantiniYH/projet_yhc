@@ -37,6 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileName = uniqid('img_') . '.' . $ext;
         $destination = $categorieDir . $fileName;
 
+
+        echo "UploadDir : $uploadDir<br>";
+echo "CategorieDir : $categorieDir<br>";
+echo "Destination : $destination<br>";
+echo "Dossier existe ? " . (is_dir($categorieDir) ? 'Oui' : 'Non') . "<br>";
+echo "Permissions : " . substr(sprintf('%o', fileperms($categorieDir)), -4);
+exit;
+
         if ($upload->moveTo($destination)) {
             echo "Fichier uploadé avec succès ! <br>";
             echo "Chemin du fichier : " . $upload->getFilePath();
@@ -47,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'nom' => $categorie['nom'],
                 'image' => $imageUrl
             ];
-            echo $uploadDir; exit;
 
         
             insert($pdo,'t_categories', $data);
