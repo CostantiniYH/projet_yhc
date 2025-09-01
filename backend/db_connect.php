@@ -56,6 +56,18 @@ function getAll2 ($pdo, $table) {
         echo "Erreur : " .$e->getMessage();
     }
 }
+
+function getAllWhere ($pdo, $table, $champ, $id) {
+    $pdo = connect();
+    try {
+        $sql = "SELECT * FROM $table WHERE $champ = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erreur : " .$e->getMessage();
+    }
+}
 // Sélectionner une ligne par un ID :
 function findBy1 ($pdo, $table, $champ, $id) {
     try {
@@ -85,8 +97,8 @@ function findBy ($pdo, $table, $champ, $id) {
     }
 }
 
-// Séléctionner un élément ($element) d'une table ($table)
-// selon une colonne ($champ) en fonction d'un id ($id) :
+// Séléctionner une ou plusieurs données ($element) d'une table ($table)
+// en fonction d'une autre donnée ($id) d'une colonne ($champ):
 function findBy2 ($pdo, $element, $table, $champ, $id) {
     try {
         $sql = "SELECT $element FROM $table WHERE $champ = ?";
