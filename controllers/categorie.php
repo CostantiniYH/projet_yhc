@@ -45,6 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 'nom' => $categorie['nom'],
                 'image' => $imageUrl
             ];
+            echo $uploadDir; exit;
+
         
             insert($pdo,'t_categories', $data);
             header('Location: ' . BASE_URL . 'crud/categorie.php?success=Catégorie ajoutée avec succès !');
