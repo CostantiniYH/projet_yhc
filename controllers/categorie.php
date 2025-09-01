@@ -72,10 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         } else {
             echo "Erreur lors du déplacement du fichier : " . implode(', ', $upload->getError());
+                header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=La catégorie n\'a pas pu être ajoutée.' ) ;
             exit();
         }
     } else {
         echo "Erreur de validation : " . implode(', ', $upload->getError());
+            header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=La catégorie n\'a pas pu être ajoutée.' ) ;
         exit();
     } 
 } else {
