@@ -9,7 +9,7 @@ require_login();
 
 $pdo = connect();
 $categories = getAll($pdo, 't_categories');
-$produits = getAll($pdo, 't_produits');
+$produits = getAllWhere($pdo, 't_produits', 'deleted_at IS NULL AND quantite', '> 0');
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;  // Sécurisation
 

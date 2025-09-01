@@ -64,7 +64,7 @@ $navbar = new Navbar();
                     <?php 
 
                     $pdo = connect();
-                    $categories = getAllWhere($pdo, 't_categories', 'deleted_at', null);                     
+                    $categories = getAll($pdo, 't_categories');                    
                     
                     $id = isset($_GET['id']) ? intval($_GET['id']) : null;
                     
