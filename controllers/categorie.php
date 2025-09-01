@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
-            die("Impossible de créer le dossier upload principal !");
+            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier upload principal !');
         }
 
         
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (!file_exists($_FILES['image']['tmp_name'])) {
-            die("Erreur : le fichier temporaire n'existe pas.");
+            header('Location: ' . BASE_URL . ' crud/categorie.php?=Erreur : le fichier temporaire n\'existe pas.');
         }
 
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
