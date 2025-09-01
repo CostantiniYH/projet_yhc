@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($upload->validate()) {
         $uploadDir = __DIR__ . '/../uploads/';
-        $baseUrl = BASE_URL . 'uploads/';
+        $baseUrl = 'uploads/';
 
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true); // Crée le dossier avec les bonnes permissions
@@ -40,9 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "Chemin du fichier : " . $upload->getFilePath();
             $pdo = connect();
         
+            $imageUrl = $categorieUrl . $fileName;
             $data = [
                 'nom' => $categorie['nom'],
-                'image' => $destination
+                'image' => $imageUrl
             ];
         
             insert($pdo,'t_categories', $data);
