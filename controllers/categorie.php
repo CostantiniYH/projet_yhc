@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             mkdir($uploadDir, 0775, true); // Crée le dossier avec les bonnes permissions
         }
 
-        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
             die("Impossible de créer le dossier upload principal !");
         }
 
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             mkdir($categorieDir, 0775, true); // Crée le dossier de la catégorie avec les bonnes permissions
         }
         
-        if (!is_dir($categorieDir) && !mkdir($categorieDir, 0755, true)) {
+        if (!is_dir($categorieDir) && !mkdir($categorieDir, 0775, true)) {
             die("Impossible de créer le dossier de la catégorie !");
         }
 
