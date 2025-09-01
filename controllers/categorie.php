@@ -21,8 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             mkdir($uploadDir, 0755, true); // Crée le dossier avec les bonnes permissions
         }
         
-        $categorieDir = $uploadDir . $categorie['nom'] . '/';
-        $categorieUrl = $baseUrl . $categorie['nom'] . '/';
+        $categorieClean = preg_replace('/[^a-zA-Z0-9_-]/', '_', $categorie['nom']);
+        $categorieDir = $uploadDir . $categorieClean . '/';
+        $categorieUrl = $baseUrl . $categorieClean . '/';
 
         if (!is_dir($categorieDir)) {
             mkdir($categorieDir, 0755, true); // Crée le dossier de la catégorie avec les bonnes permissions
@@ -32,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die("Erreur : le fichier temporaire n'existe pas.");
         }
 
-        $fileName = uniqid('img_') . '.' . basename($_FILES['image']['name']);
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = uniqid('img_') . '.' . $ext;
         $destination = $categorieDir . $fileName;
 
         if ($upload->moveTo($destination)) {
