@@ -71,13 +71,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header('Location: ' . BASE_URL . 'crud/categorie.php?success=Catégorie ajoutée avec succès !');
             exit();
         } else {
-            echo "Erreur lors du déplacement du fichier : " . implode(', ', $upload->getError());
-                header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=La catégorie n\'a pas pu être ajoutée.' ) ;
+            $erreurMove = "Erreur lors du déplacement du fichier : " . implode(', ', $upload->getError());
+            header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=' . $erreurMove . '' ) ;
             exit();
         }
     } else {
-        echo "Erreur de validation : " . implode(', ', $upload->getError());
-            header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=La catégorie n\'a pas pu être ajoutée.' ) ;
+        $erreurValidation = "Erreur de validation : " . implode(', ', $upload->getError());
+        header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=' . $erreurValidation . '' ) ;
         exit();
     } 
 } else {
