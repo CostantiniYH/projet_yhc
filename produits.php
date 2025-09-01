@@ -6,7 +6,7 @@ require_once __DIR__ . '/class/navbar.php';
 require_once __DIR__ . '/class/carousel.php';
 
 $connect = connect ();
-$produits = getAllWhere ($connect, 't_produits', 'deleted_at IS NULL AND quantite', '> 0');
+$produits = getAllWhere ($connect, 't_produits', 'deleted_at IS NULL AND quantite >', [0]);
 $id = $_GET['id'] ?? null;
 
 $navbar = new Navbar();

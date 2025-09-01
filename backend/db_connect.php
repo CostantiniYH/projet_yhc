@@ -57,12 +57,12 @@ function getAll2 ($pdo, $table) {
     }
 }
 
-function getAllWhere ($pdo, $table, $champ, $id) {
+function getAllWhere ($pdo, $table, $champ, $param = []) {
     $pdo = connect();
     try {
-        $sql = "SELECT * FROM $table WHERE $champ = ?";
+        $sql = "SELECT * FROM $table WHERE $champ";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$id]);
+        $stmt->execute([$param]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         echo "Erreur : " .$e->getMessage();
