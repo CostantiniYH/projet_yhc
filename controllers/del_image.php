@@ -12,7 +12,7 @@ if ($id) {
     $imageNom = $image['nom'];
     
     if ($image) {
-        delete($pdo, 't_images', $id, true);
+        delete($pdo, 't_images', $id);
        // var_dump(delete($connect, 't_images', $id, true));
        // exit();
         if (isAdmin()) {

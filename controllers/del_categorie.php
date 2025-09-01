@@ -12,7 +12,7 @@ if ($id) {
     $categorieNom = $categorie['nom'];
     
     if ($categorie) {
-        delete($pdo, 't_categories', $id, true);
+        delete($pdo, 't_categories', $id);
        // var_dump(delete($connect, 't_categories', $id, true));
        // exit();
         if (isAdmin()) {
