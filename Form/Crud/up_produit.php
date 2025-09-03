@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../controllers/session.php';
-require_once __DIR__ . '/../components/header.php';
-require_once __DIR__ . '/../class/navbar.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../components/header.php';
+require_once __DIR__ . '/../../class/navbar.php';
 
 require_login();
 $connect = connect(); 
@@ -32,37 +32,21 @@ $navbar = new Navbar();
         if (isAdmin()) {
             $navbar->AddItem('', 'admin/dashboard_admin.php', 'center', '', 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
         }
-    $navbar->AddItem('', 'compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
-    $navbar->AddItem('', 'crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
+    $navbar->AddItem('', 'Compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
+    $navbar->AddItem('', 'Form/Crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
     $navbar->AddItem('','crud/produit.php','center', true, 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
-    $navbar->AddItem('', 'crud/image.php', 'center', '', 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
-    $navbar->AddItem('', 'compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
+    $navbar->AddItem('', 'Form/Crud/image.php', 'center', '', 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
+    $navbar->AddItem('', 'Compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
     $navbar->AddItem('','javascript:location.replace(BASE_URL + "logout.php")','right', '', 'bi bi-door-open-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-red" title="Déconnexion');
 $navbar->render() ;
 ?>
 
 <div class="container">
-    <?php if (isset($_GET['erreur'])): ?>
-        <div class="alert alert-danger alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['erreur']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['message'])): ?>
-        <div class="alert alert-warning alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['message']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
-            <?= htmlspecialchars($_GET['success']) ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
+    <?php require_once __DIR__ . '/../../components/alerts.php'; ?>
+
             
     <div class="row gap-4">
-        <form action="<?= BASE_URL ?>controllers/up_produit.php" method="post" enctype="multipart/form-data" 
+        <form action="<?= BASE_URL ?>Controllers/Create-Update/up_produit.php" method="post" enctype="multipart/form-data" 
         class="col-md-5 rounded-4 shadow p-5 border border-2 border-warning" 
         data-aos="fade-in-zoom" data-aos-duration="1500">
         
@@ -116,7 +100,7 @@ $navbar->render() ;
             <h2>Produit à modifier</h2>            
             <?php 
                 $value = $up_produit;
-                require_once __DIR__ . '/../components/card_modifie.php';       
+                require_once __DIR__ . '/../../components/card_modifie.php';       
             
             ?>
         </div>
@@ -126,5 +110,5 @@ $navbar->render() ;
 
 
 <?php
-require_once __DIR__ . '/../components/footer.php';
+require_once __DIR__ . '/../../components/footer.php';
 ?>

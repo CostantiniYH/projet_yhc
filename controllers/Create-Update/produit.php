@@ -1,6 +1,6 @@
 <?php
 require '../backend/db_connect.php';
-require '../controllers/session.php';
+require '../Controllers/session.php';
 require '../class/produit.php';
 require '../class/upload.php';
 
@@ -53,10 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ];
 
     insert($pdo,'t_produits', $data);
-    header('Location: ' . BASE_URL . 'crud/produit.php?success=Produit ajouté avec succès !');
+    header('Location: ' . BASE_URL . 'Form/Crud/produit.php?success=Produit ajouté avec succès !');
     exit();
 } else {
-    header('Location: ' . BASE_URL . 'crud/produit.php?erreur=Le produit n\'a pas pu être ajouté.' ) ;
+    header('Location: ' . BASE_URL . 'Form/Crud/produit.php?erreur=Le produit n\'a pas pu être ajouté.' ) ;
     exit();
 }
 ?>

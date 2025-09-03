@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../controllers/session.php';
-require_once __DIR__ . '/../components/header.php';
-require_once __DIR__ . '/../class/navbar.php';
-require_once __DIR__ . '/../class/carousel.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../components/header.php';
+require_once __DIR__ . '/../../class/navbar.php';
+require_once __DIR__ . '/../../class/carousel.php';
 
 require_login();
 
@@ -32,23 +32,23 @@ $navbar = new Navbar();
         if (isAdmin()) {
             $navbar->AddItem('', 'admin/dashboard_admin.php', 'center', '', 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
         }
-    $navbar->AddItem('', 'compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
-    $navbar->AddItem('', 'crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
-    $navbar->AddItem('','crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
+    $navbar->AddItem('', 'Compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
+    $navbar->AddItem('', 'Form/Crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
+    $navbar->AddItem('','Form/Crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
     $navbar->AddItem('', 'crud/image.php', 'center', true, 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
-    $navbar->AddItem('', 'compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
+    $navbar->AddItem('', 'Compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
     $navbar->AddItem('','javascript:location.replace(BASE_URL + "logout.php")','right', '', 'bi bi-door-open-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-red" title="Déconnexion');
 
 $navbar->render() ;
 ?>
 
 <div class="container mb-5 mt-5">
-    <?php require_once __DIR__ . '/../components/alerts.php'; ?>
+    <?php require_once __DIR__ . '/../../components/alerts.php'; ?>
 
     <h1 class="mb-5 shadow rounded-4 border-start border-end border-2 border-success">Gestion de la galerie</h1>
 
     <div class="row mb-4 gap-4">
-        <form action="<?= BASE_URL ?>controllers/image.php" method="post" class="col-md-5 mb-5 p-2 shadow-lg
+        <form action="<?= BASE_URL ?>Controllers/Create-Update/image.php" method="post" class="col-md-5 mb-5 p-2 shadow-lg
          rounded-4 border border-1 border-success" data-aos="zoom-in" enctype="multipart/form-data">
             <?php if ($id) { ?>
                 <input type="hidden" name="id" value="<?= htmlspecialchars($image['id']) ?>">
@@ -84,7 +84,7 @@ $navbar->render() ;
             <div class="row">
             <?php foreach ($images as $image => $value) { ?>
                 <div class="col-md-3 mb-2">
-                    <?php require __DIR__ . '/../components/image.php'; ?>
+                    <?php require __DIR__ . '/../../components/image.php'; ?>
                 </div>
             <?php } ?>
             </div>
@@ -92,5 +92,5 @@ $navbar->render() ;
     </div>
 </div>
 <?php
-require_once __DIR__ . '/../components/footer.php';
+require_once __DIR__ . '/../../components/footer.php';
 ?>

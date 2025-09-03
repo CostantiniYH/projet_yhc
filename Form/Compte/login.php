@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../components/header.php';
-require_once __DIR__ . '/../class/navbar.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../components/header.php';
+require_once __DIR__ . '/../../class/navbar.php';
 
 $navbar = new Navbar();
 $navbar->AddItem('|| YHC ||','index.php', 'left', '', '');
@@ -12,10 +12,10 @@ $navbar->render() ;
 ?>
 
 <div class="container mt-5">
-    <?php require_once __DIR__ . '/../components/alerts.php'; ?>
+    <?php require_once __DIR__ . '/../../components/alerts.php'; ?>
     
     <div class="row">
-    <form action="<?= BASE_URL ?>controllers/login.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg rounded-4 border border-1 border-success">
+    <form action="<?= BASE_URL ?>Controllers/login.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg rounded-4 border border-1 border-success">
         <h2 class="text-center">Connexion</h2>
         <div class="form-group mb-2">
             <label for="email">Email :</label>
@@ -34,7 +34,7 @@ $navbar->render() ;
 
 <?php
 
-require_once __DIR__ . '/../components/footer.php';
+require_once __DIR__ . '/../../components/footer.php';
 ?>
 
 

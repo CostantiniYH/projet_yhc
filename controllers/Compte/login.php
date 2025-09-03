@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../controllers/session.php';
-require_once __DIR__ . '/../class/user.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../class/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -19,7 +19,7 @@ $value = findBy2( $pdo, '*', 't_users', 'email', $email);
 //exit();
 
 if (is_array($value) && count($value) == 0) {
-    header('Location: ' . BASE_URL . 'compte/login.php?erreur=L\'utilisateur n\'existe pas.');
+    header('Location: ' . BASE_URL . 'Form/Compte/login.php?erreur=L\'utilisateur n\'existe pas.');
     exit();
 }
 
@@ -31,10 +31,10 @@ $password_hash = $value['password'];
             header('Location: ' . BASE_URL . 'admin/dashboard_admin.php?success=Vous êtes connecté en tant qu\'administrateur.');
             exit();
         } 
-        header ('Location: ' . BASE_URL . 'compte/dashboard.php?success=Connexion réussi !');
+        header ('Location: ' . BASE_URL . 'Compte/dashboard.php?success=Connexion réussi !');
         exit();
     } else {
-        header('Location: ' . BASE_URL . 'compte/login.php?erreur=Le mot de passe est incorrecte !');
+        header('Location: ' . BASE_URL . 'Form/Compte/login.php?erreur=Le mot de passe est incorrecte !');
         exit();
     }
 

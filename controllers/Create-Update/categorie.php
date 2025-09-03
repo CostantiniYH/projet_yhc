@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../controllers/session.php';
-require_once __DIR__ . '/../class/upload.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../class/upload.php';
 
 
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
-            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier uploads principal !');
+            header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=Impossible de créer le dossier uploads principal !');
             exit();
         }
 
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         
         if (!is_dir($categorieDir) && !mkdir($categorieDir, 0775, true)) {
-            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=Impossible de créer le dossier ' . $categorieClean . '!');
+            header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=Impossible de créer le dossier ' . $categorieClean . '!');
             exit();
         }
 
@@ -73,20 +73,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         
             insert($pdo,'t_categories', $data);
-            header('Location: ' . BASE_URL . 'crud/categorie.php?success=Catégorie ajoutée avec succès !');
+            header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?success=Catégorie ajoutée avec succès !');
             exit();
         } else {
             $erreurMove = "Erreur lors du déplacement du fichier : " . implode(', ', $upload->getError());
-            header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=' . $erreurMove . '' ) ;
+            header('Location: ' . BASE_URL . 'crud/categorie.php?erreur=' . $erreurMove . '' ) ;
             exit();
         }
     } else {
         $erreurValidation = "Erreur de validation : " . implode(', ', $upload->getError());
-        header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=' . $erreurValidation . '' ) ;
+        header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=' . $erreurValidation . '' ) ;
         exit();
     } 
 } else {
-    header( 'Location: ' . BASE_URL . 'crud/categorie.php?erreur=La catégorie n\'a pas pu être ajoutée.' ) ;
+    header( 'Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=La catégorie n\'a pas pu être ajoutée.' ) ;
     exit();
 }
 ?>

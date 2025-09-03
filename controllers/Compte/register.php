@@ -1,14 +1,14 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../class/user.php';
-require_once __DIR__ . '/../controllers/session.php';
-require_once __DIR__ . '/../class/upload.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../class/user.php';
+require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../class/upload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Vérifier si les mots de passe correspondent
     if ($_POST['password'] !== $_POST['password2']) {
-        header('Location: ' . BASE_URL . 'register.php?message=Les mots de passe ne correspondent pas !');
+        header('Location: ' . BASE_URL . 'Compte/register.php?message=Les mots de passe ne correspondent pas !');
         exit();
     }
     
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = $user->getError();
     
     if (!empty($error)) {
-        header('Location: ' . BASE_URL . 'compte/register.php?erreur=' . urlencode($error[0]));
+        header('Location: ' . BASE_URL . 'Compte/register.php?erreur=' . urlencode($error[0]));
         exit();
     }
 
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update = update($pdo, 't_users', $data, 'id', $id);
 
         if ($update) {
-            header('Location: ' . BASE_URL . 'compte/dashboard.php?success=Votre profil a été mis à jour avec succès !');
+            header('Location: ' . BASE_URL . 'Compte/dashboard.php?success=Votre profil a été mis à jour avec succès !');
             exit();
         } else {
             echo "Erreur lors de la modification de votre profil !";
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         insert($pdo,'t_users', $data);
         
-        header('Location: ' . BASE_URL . 'compte/dashboard.php?success=Utilisateur ajouté avec succès !');
+        header('Location: ' . BASE_URL . 'Compte/dashboard.php?success=Utilisateur ajouté avec succès !');
         exit();
     } 
 }

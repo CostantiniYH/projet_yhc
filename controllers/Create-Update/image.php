@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../controllers/session.php';
-require_once __DIR__ . '/../class/upload.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../class/upload.php';
 
 
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ];
         
             insert($pdo,'t_images', $data);
-            header('Location: ' . BASE_URL . 'crud/image.php?success=Image ajoutée avec succès !');
+            header('Location: ' . BASE_URL . 'Form/Crud/image.php?success=Image ajoutée avec succès !');
             exit();
         } else {
             echo "Erreur lors du déplacement du fichier : " . implode(', ', $upload->getError());
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     } 
 } else {
-    header( 'Location: ' . BASE_URL . 'crud/image.php?erreur=L\'image n\'a pas pu être ajouté.' ) ;
+    header('Location: ' . BASE_URL . 'Form/Crud/image.php?erreur=L\'image n\'a pas pu être ajouté.' ) ;
     exit();
 }
 ?>

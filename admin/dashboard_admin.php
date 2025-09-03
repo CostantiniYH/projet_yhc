@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../backend/db_connect.php';
-require_once __DIR__ . '/../controllers/session.php';
+require_once __DIR__ . '/../Controllers/session.php';
 require_once __DIR__ . '/../components/header.php';
 require_once __DIR__ . '/../class/navbar.php';
 
@@ -41,11 +41,11 @@ $navbar = new Navbar();
     $navbar->AddItem('Produits liste', 'produits.php', 'dropdown', '', '');
     $navbar->AddItem('Galerie','image.php','dropdown', '', '');
     $navbar->AddItem('', 'admin/dashboard_admin.php', 'center', true, 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
-    $navbar->AddItem('', 'compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
-    $navbar->AddItem('', 'crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
-    $navbar->AddItem('','crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
-    $navbar->AddItem('', 'crud/image.php', 'center', '', 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
-    $navbar->AddItem('', 'compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
+    $navbar->AddItem('', 'Compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
+    $navbar->AddItem('', 'Form/Crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
+    $navbar->AddItem('','Form/Crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
+    $navbar->AddItem('', 'Form/Crud/image.php', 'center', '', 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
+    $navbar->AddItem('', 'Compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
 
     $navbar->AddItem('', 'javascript:location.replace(BASE_URL + "logout.php")', 'right', '', 'bi bi-door-open-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-red" title="Déconnexion');
 $navbar->render();
@@ -82,9 +82,9 @@ $navbar->render();
                                 <td>
                                     <a href="#.php?id=<?= $u['id']; ?>" 
                                         class="btn btn-primary bi bi-eye"></a>
-                                    <a href="<?= BASE_URL ?>compte/register.php?id=<?= $u['id']; ?>" 
+                                    <a href="<?= BASE_URL ?>Form/Compte/register.php?id=<?= $u['id']; ?>" 
                                         class="btn btn-warning bi bi-pencil"></a>
-                                    <a href="<?= BASE_URL ?>controllers/del_user.php?id=<?= $u['id']; ?>" 
+                                    <a href="<?= BASE_URL ?>Controllers/Delete/user.php?id=<?= $u['id']; ?>" 
                                     class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                 </td>
 
@@ -109,9 +109,9 @@ $navbar->render();
                                     <td>
                                 <a href="<?= BASE_URL ?>produits.php?id=<?= $c['id']; ?>" 
                                     class="btn btn-primary bi bi-eye"></a>
-                                <a href="<?= BASE_URL ?>crud/categorie.php?id=<?= $c['id']; ?>" 
+                                <a href="<?= BASE_URL ?>Form/Crud/categorie.php?id=<?= $c['id']; ?>" 
                                     class="btn btn-warning bi bi-pencil"></a>
-                                <a href="<?= BASE_URL ?>controllers/del_categorie.php?id=<?= $c['id']; ?>" 
+                                <a href="<?= BASE_URL ?>Controllers/Delete/categorie.php?id=<?= $c['id']; ?>" 
                                 class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                 </td>
                                 </tr>
@@ -145,11 +145,11 @@ $navbar->render();
                                     <td><?= $p['image']; ?></td>
                                     <td><?= $p['id']; ?></td>
                                     <td>
-                                        <a href="../produit_one.php?id=<?= $p['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>produit_one.php?id=<?= $p['id']; ?>" 
                                             class="btn btn-primary bi bi-eye"></a>
-                                        <a href="../crud/produit.php?id=<?= $p['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>Form/Crud/produit.php?id=<?= $p['id']; ?>" 
                                             class="btn btn-warning bi bi-pencil"></a>
-                                        <a href="../controllers/del_produit.php?id=<?= $p['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>Controllers/Delete/produit.php?id=<?= $p['id']; ?>" 
                                         class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                     </td>
                                 </tr>
@@ -173,11 +173,11 @@ $navbar->render();
                                     <td><?= $i['image']; ?></td>
                                     <td><?= $i['nom_categorie']; ?></td>
                                     <td>
-                                        <a href="../image.php?id=<?= $i['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>image.php?id=<?= $i['id']; ?>" 
                                             class="btn btn-primary bi bi-eye"></a>
-                                        <a href="../crud/image.php?id=<?= $i['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>Form/Crud/image.php?id=<?= $i['id']; ?>" 
                                             class="btn btn-warning bi bi-pencil"></a>
-                                        <a href="del_image.php?id=<?= $i['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>Delete/image.php?id=<?= $i['id']; ?>" 
                                         class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                     </td>
                                 </tr>
