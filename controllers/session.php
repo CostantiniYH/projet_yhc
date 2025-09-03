@@ -34,7 +34,7 @@ function loginUser($user) {
 
 function require_login() {
     if (!isLoggedIn()) {
-        header('Location: ' . BASE_URL . 'compte/login.php?=message=Veuillez vous connecter.');
+        header('Location: ' . BASE_URL . 'Form/Compte/login.php?=message=Veuillez vous connecter.');
         exit();
     }
 }
