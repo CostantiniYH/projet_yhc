@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../backend/db_connect.php';
-require_once __DIR__ . '/../../Controllers/session.php';
+require_once __DIR__ . '/../../controllers/session.php';
 require_once __DIR__ . '/../../components/header.php';
 require_once __DIR__ . '/../../class/navbar.php';
 
@@ -25,7 +25,7 @@ $navbar->render();
     <?php require_once __DIR__ . '/../../components/alerts.php'; ?>
 
     <div class="row">
-        <form action="<?= BASE_URL ?>Controllers/Compte/register.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg
+        <form action="<?= BASE_URL ?>controllers/Compte/register.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg
         rounded-4 border border-1 border-success" enctype="multipart/form-data">
             <h2 class="text-center"><?= $user ? 'Modifier votre profil' : 'Inscription' ?></h2>
             <div class="form-group mb-2">

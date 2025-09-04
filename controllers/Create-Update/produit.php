@@ -1,8 +1,8 @@
 <?php
-require '../backend/db_connect.php';
-require '../Controllers/session.php';
-require '../class/produit.php';
-require '../class/upload.php';
+require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../controllers/session.php';
+require_once __DIR__ . '/../../class/produit.php';
+require_once __DIR__ . '/../../class/upload.php';
 
 
 

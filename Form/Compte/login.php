@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../backend/db_connect.php';
+require_once __DIR__ . '/../../controllers/session.php';
 require_once __DIR__ . '/../../components/header.php';
 require_once __DIR__ . '/../../class/navbar.php';
 
@@ -15,7 +15,7 @@ $navbar->render() ;
     <?php require_once __DIR__ . '/../../components/alerts.php'; ?>
     
     <div class="row">
-    <form action="<?= BASE_URL ?>Controllers/Compte/login.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg rounded-4 border border-1 border-success">
+    <form action="<?= BASE_URL ?>controllers/Compte/login.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg rounded-4 border border-1 border-success">
         <h2 class="text-center">Connexion</h2>
         <div class="form-group mb-2">
             <label for="email">Email :</label>

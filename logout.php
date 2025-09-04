@@ -1,4 +1,4 @@
 <?php
-require_once __DIR__ . '/Controllers/session.php';
+require_once __DIR__ . '/controllers/session.php';
 logoutUser();
 ?>
