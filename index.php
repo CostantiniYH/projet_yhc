@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/backend/db_connect.php';
 require_once __DIR__ . '/Controllers/session.php';
 require_once __DIR__ . '/components/header.php';
 require_once __DIR__ . '/class/navbar.php';
