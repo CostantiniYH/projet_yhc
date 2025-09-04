@@ -17,7 +17,7 @@ if ($id) {
 $navbar = new Navbar();
 $navbar->AddItem('|| YHC ||','index.php', 'left', '','');
 $navbar->AddItem('Accueil','index.php','center', '','');
-$navbar->AddItem('Connexion','compte/login.php','right', '','');
+$navbar->AddItem('Connexion','Form/Compte/login.php','right', '','');
 $navbar->render();
 
 ?>
@@ -25,7 +25,7 @@ $navbar->render();
     <?php require_once __DIR__ . '/../../components/alerts.php'; ?>
 
     <div class="row">
-        <form action="<?= BASE_URL ?>Controllers/register.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg
+        <form action="<?= BASE_URL ?>Controllers/Compte/register.php" method="post" class="p-5 col-md-6 offset-3 mb-5 p-2 shadow-lg
         rounded-4 border border-1 border-success" enctype="multipart/form-data">
             <h2 class="text-center"><?= $user ? 'Modifier votre profil' : 'Inscription' ?></h2>
             <div class="form-group mb-2">
