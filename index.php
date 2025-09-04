@@ -37,8 +37,8 @@ if (isLoggedIn()) {
     $navbar->AddItem('', 'Form/Crud/image.php', 'dropdown', '', 'bi bi-image');
     $navbar->AddItem('', 'Compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
 
-    $navbar->AddItem('','compte/login.php','right', '', 'bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Connexion');
-    $navbar->AddItem('Inscription','compte/register.php', 'right', '', '');
+    $navbar->AddItem('','Form/Compte/login.php','right', '', 'bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Connexion');
+    $navbar->AddItem('Inscription','Form/Compte/register.php', 'right', '', '');
 }
 
 $navbar->render();
