@@ -7,8 +7,8 @@ $host = $_SERVER['HTTP_HOST'];
 if ($host === 'localhost' || $host === '127.0.0.1') {
     define('BASE_URL', $protocol . '://' . $host . '/projet_yhc/');
 } else {
-    //define('BASE_URL', $protocol . '://83.159.94.100:8090/');
-    define('BASE_URL', $protocol . '://192.168.197.179:8090/');
+    define('BASE_URL', $protocol . '://37.166.226.50:8090/');
+    //define('BASE_URL', $protocol . '://192.168.197.179:8090/');
 
 }
 
