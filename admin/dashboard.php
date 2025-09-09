@@ -160,7 +160,7 @@ $navbar->render();
                                     class="btn btn-primary bi bi-eye"></a>
                                 <a href="<?= BASE_URL ?>Form/Crud/categorie.php?id=<?= $c['id']; ?>" 
                                     class="btn btn-warning bi bi-pencil"></a>
-                                <a href="<?= BASE_URL ?>Controllers/Delete/categorie.php?id=<?= $c['id']; ?>" 
+                                <a href="<?= BASE_URL ?>controllers/Delete/categorie.php?id=<?= $c['id']; ?>" 
                                 class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                 </td>
                                 </tr>
@@ -198,7 +198,7 @@ $navbar->render();
                                             class="btn btn-primary bi bi-eye"></a>
                                         <a href="<?= BASE_URL ?>Form/Crud/produit.php?id=<?= $p['id']; ?>" 
                                             class="btn btn-warning bi bi-pencil"></a>
-                                        <a href="<?= BASE_URL ?>Controllers/Delete/produit.php?id=<?= $p['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>controllers/Delete/produit.php?id=<?= $p['id']; ?>" 
                                         class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                     </td>
                                 </tr>
@@ -226,7 +226,7 @@ $navbar->render();
                                             class="btn btn-primary bi bi-eye"></a>
                                         <a href="<?= BASE_URL ?>Form/Crud/image.php?id=<?= $i['id']; ?>" 
                                             class="btn btn-warning bi bi-pencil"></a>
-                                        <a href="<?= BASE_URL ?>Delete/image.php?id=<?= $i['id']; ?>" 
+                                        <a href="<?= BASE_URL ?>controllers/Delete/image.php?id=<?= $i['id']; ?>" 
                                         class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
                                     </td>
                                 </tr>
