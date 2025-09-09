@@ -237,6 +237,18 @@ $navbar->render();
         </div>
     </div>
 </div>
+<script>
+    fetch('BASE_URL + controllers/deploy.php', { method: 'POST', body: new URLSearchParams({ token: 'MON_TOKEN' }) })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                // Redirection après succès
+                window.location.href = 'BASE_URL + admin/dashboard.php';
+            } else {
+                alert('Erreur pendant le déploiement');
+            }
+    });
+</script>
 <?php 
 require_once __DIR__ . '/../components/footer.php'
 ?>
