@@ -14,64 +14,66 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $upload = new Upload($_FILES['image']);
 
     if ($upload->validate()) {
-        $uploadDir = __DIR__ . '/../uploads/';
-        $baseUrl = BASE_URL . 'uploads/';
+        $uploadDir = 'uploads/';
+        $uploadPath = __DIR__ . '/../../uploads/';
 
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0775, true); // Crée le dossier avec les bonnes permissions
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0775, true); 
         }
 
-        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
-            header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=Impossible de créer le dossier uploads principal !');
+        if (!is_dir($uploadPath) && !mkdir($uploadPath, 0775,
+         true)) {
+            header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=Impossible de créer le dossier 
+            uploads principal !');
             exit();
         }
 
-        
-        
+        if (!is_writable($uploadPath)) {
+            die("Erreur : le dossier uploads n'est pas inscriptible par PHP !");
+        }
+  
         $categorieClean = preg_replace('/[^a-zA-Z0-9_-]/', '_', $categorie['nom']);
-        $categorieDir = $uploadDir . $categorieClean . '/';
-        $categorieUrl = $baseUrl . $categorieClean . '/';
-        if (!is_writable(__DIR__ . '/../uploads')) {
-    die("Erreur : le dossier uploads n'est pas inscriptible par PHP !");
-}
-
-        if (!is_dir($categorieDir)) {
-            mkdir($categorieDir, 0775, true); // Crée le dossier de la catégorie avec les bonnes permissions
+        $categoriePath = $uploadPath . $categorieClean . '/';
+        
+        if (!is_dir($categoriePath)) {
+            mkdir($categoriePath, 0775, true); // Crée le dossier de la catégorie avec les bonnes permissions
         }
         
-        if (!is_dir($categorieDir) && !mkdir($categorieDir, 0775, true)) {
+        if (!is_dir($categoriePath) && !mkdir($categoriePath, 0775, true)) {
             header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?erreur=Impossible de créer le dossier ' . $categorieClean . '!');
             exit();
         }
-
+        
         if (!file_exists($_FILES['image']['tmp_name'])) {
             die("Erreur : le fichier temporaire n'existe pas.");
         }
-
+        
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $fileName = uniqid('img_') . '.' . $ext;
-        $destination = $categorieDir . $fileName;
 
-
+        $destination = $uploadPath . $categorieClean . '/' . $fileName;
+        
+        
         //echo "UploadDir : $uploadDir<br>";
         //echo "CategorieDir : $categorieDir<br>";
         //echo "Destination : $destination<br>";
         //echo "Dossier existe ? " . (is_dir($categorieDir) ? 'Oui' : 'Non') . "<br>";
         //echo "Permissions : " . substr(sprintf('%o', fileperms($categorieDir)), -4);
         //exit;
-
+        
         if ($upload->moveTo($destination)) {
             echo "Fichier uploadé avec succès ! <br>";
             echo "Chemin du fichier : " . $upload->getFilePath();
-            $pdo = connect();
-        
-            $imageUrl = $categorieUrl . $fileName;
+            
+            $categorieDir = $uploadDir . $categorieClean . '/';
+            $imageUrl = $categorieDir . $fileName;
             $data = [
                 'nom' => $categorie['nom'],
                 'image' => $imageUrl
             ];
-
-        
+            
+            $pdo = connect();
+            
             insert($pdo,'t_categories', $data);
             header('Location: ' . BASE_URL . 'Form/Crud/categorie.php?success=Catégorie ajoutée avec succès !');
             exit();

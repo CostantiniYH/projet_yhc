@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$allowedRemote = ['origin', 'mobile', 'github'];
+$allowedRemote = ['origin', 'mobile', 'github', 'wan'];
 $remote = $_POST['remote'] ?? 'origin';
 
 if (!in_array($remote, $allowedRemote)) {
@@ -44,7 +44,7 @@ if ($token !== $secretKey) {
 unset($_SESSION['csrf_token']);
 
 $gitPath = escapeshellarg('C:\Program Files\Git\bin\git.exe');
-$projectDir = escapeshellarg('C:\wamp64\www\projet_otsar');
+$projectDir = escapeshellarg('C:\wamp64\www\projet_yhc');
 
 $output = [];
 $success = true;

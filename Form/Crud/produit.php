@@ -83,7 +83,7 @@ $navbar->render() ;
                     <option value="<?= $id ? $produit['id_categorie'] : '' ?>" selected><?= $id ? $produit['nom_categorie'] : '' ?></option>
                     <?php                    
                     foreach ($categories as $categorie) : ?>
-                    <option value="<?php echo $categorie['id']; ?>"><?php echo $categorie['nom']; ?></option>
+                    <option value="<?= $categorie['id']; ?>"><?= $categorie['nom']; ?></option>
                     <?php endforeach; ?>                        
                 </select>
             </div>

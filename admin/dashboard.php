@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../backend/db_connect.php';
 require_once __DIR__ . '/../controllers/session.php';
 require_once __DIR__ . '/../components/header.php';
 require_once __DIR__ . '/../class/navbar.php';
@@ -17,17 +16,25 @@ if (isAdmin()) {
 //print_r($_SESSION);
 //echo "</pre>";
 
-$connect = connect();
+$pdo = connect();
 
-$user = getAll($connect, 't_users');
-$categorie = getAll($connect, 't_categories');
+$user = getAll($pdo, 't_users');
+$categorie = getAll($pdo, 't_categories');
 
-$sql = "SELECT p.*, c.nom AS nom_categorie FROM t_produits p
- INNER JOIN t_categories c ON p.id_categorie = c.id WHERE deleted_at IS NULL";
-$stmt = $connect->prepare($sql);
-$stmt->execute([]);
-$produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$image = getAll2($connect, 't_images');
+function produitDash($pdo) {
+    try {
+    $sql = "SELECT p.*, c.nom AS nom_categorie FROM t_produits p
+    INNER JOIN t_categories c ON p.id_categorie = c.id WHERE deleted_at IS NULL";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([]);
+    $produit = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $produit;
+    } catch (PDOException $e) {
+        echo "Erreur : " .$e->getMessage();
+    }
+} 
+$produit = produitDash($pdo);
+$image = getAll2($pdo, 't_images');
 
 if (!isset($_SESSION['user'])) {
     die("Erreur : utilisateur non connecté.");
@@ -35,19 +42,18 @@ if (!isset($_SESSION['user'])) {
 
 
 $navbar = new Navbar();
-    $navbar->AddItem('|| YHC ||','index.php', 'left', '', '');
-    $navbar->AddItem('','index.php','center', '', 'bi bi-house-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Accueil');
-    $navbar->AddItem('Catégories liste', 'categories.php', 'dropdown', '', '');   
-    $navbar->AddItem('Produits liste', 'produits.php', 'dropdown', '', '');
-    $navbar->AddItem('Galerie','image.php','dropdown', '', '');
-    $navbar->AddItem('', 'admin/dashboard.php', 'center', true, 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
-    $navbar->AddItem('', 'compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
-    $navbar->AddItem('', 'Form/Crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
-    $navbar->AddItem('', 'Form/Crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
-    $navbar->AddItem('', 'Form/Crud/image.php', 'center', '', 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
-    $navbar->AddItem('', 'compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
-
-    $navbar->AddItem('', 'javascript:location.replace(BASE_URL + "logout.php")', 'right', '', 'bi bi-door-open-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-red" title="Déconnexion');
+$navbar->AddItem('|| YHC ||','index.php', 'left', '', '');
+$navbar->AddItem('','index.php','center', '', 'bi bi-house-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Accueil');
+$navbar->AddItem('Catégories liste', 'categories.php', 'dropdown', '', '');   
+$navbar->AddItem('Produits liste', 'produits.php', 'dropdown', '', '');
+$navbar->AddItem('Galerie','image.php','dropdown', '', '');
+$navbar->AddItem('', 'admin/dashboard.php', 'center', true, 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
+$navbar->AddItem('', 'compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
+$navbar->AddItem('', 'Form/Crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
+$navbar->AddItem('', 'Form/Crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
+$navbar->AddItem('', 'Form/Crud/image.php', 'center', '', 'bi bi-image" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter une image');
+$navbar->AddItem('', 'compte/panier.php', 'right', '', 'bi bi-cart3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Panier');
+$navbar->AddItem('', 'javascript:location.replace(BASE_URL + "logout.php")', 'right', '', 'bi bi-door-open-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-red" title="Déconnexion');
 $navbar->render();
 
 ?>
@@ -92,7 +98,7 @@ $navbar->render();
                         <option value="mobile">mobile</option>
                     </select>
                 </div>
-                <input type="hidden" name="token" value="<?= $_SESSION['csrf_token'] ?>">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 <button type="submit" class="btn btn-success bi bi-cloud-arrow-up-fill" > Déployer</button>
             </form>
         </div>

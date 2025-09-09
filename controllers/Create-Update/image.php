@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $upload = new Upload($_FILES['image']);
 
     if ($upload->validate()) {
-        $uploadDir = '' . BASE_URL . 'uploads/';
+        $uploadDir = 'uploads/';
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true); // Crée le dossier avec les bonnes permissions
         }
