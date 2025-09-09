@@ -26,8 +26,8 @@ $navbar->render() ;
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <div class="form-group m-4 container">
-                <input type="submit" class="col-md-6 btn btn-primary" value="Se connecter">
-            </div>
+            <input type="submit" class="col-md-6 btn btn-primary" value="Se connecter">
+        </div>
     </form>
     </div>
 </div>

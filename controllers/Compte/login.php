@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../backend/db_connect.php';
 require_once __DIR__ . '/../../controllers/session.php';
 require_once __DIR__ . '/../../class/user.php';
 
@@ -28,7 +27,7 @@ $password_hash = $value['password'];
     if (User::verifyPassword($password, $password_hash)) {
         loginUser($value);
         if (isAdmin()) {
-            header('Location: ' . BASE_URL . 'admin/dashboard_admin.php?success=Vous êtes connecté en tant qu\'administrateur.');
+            header('Location: ' . BASE_URL . 'admin/dashboard.php?success=Vous êtes connecté en tant qu\'administrateur.');
             exit();
         } 
         header ('Location: ' . BASE_URL . 'compte/dashboard.php?success=Connexion réussi !');

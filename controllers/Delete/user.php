@@ -13,7 +13,7 @@ if ($id) {
     if ($user) {
         delete($connect, 't_users', $id, true);
         if (isAdmin()) {
-            header('Location: ' . BASE_URL . 'admin/dashboard_admin.php?success=Utilisateur supprimé avec succès !');
+            header('Location: ' . BASE_URL . 'admin/dashboard.php?success=Utilisateur supprimé avec succès !');
         } else {
         header('Location: ' . BASE_URL . 'compte/login.php?success=Utilisateur supprimé avec succès !');
         exit();

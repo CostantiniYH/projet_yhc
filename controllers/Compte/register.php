@@ -22,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $societe = trim(htmlspecialchars($_POST['societe']));
 
     
-    $pdo = connect();    
     
     $user = new User($nom, $prenom, $email, $password, $telephone, $societe);
     
@@ -69,12 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'telephone' => $user->getTelephone(),
         'societe' => $user->getSociete(),
         'photo' => $destination
-        ];
-
+    ];
+    
     if (!empty($id)) {
-
+        
         $data['id'] = $id;
-
+        
+        $pdo = connect();    
+        
         $update = update($pdo, 't_users', $data, 'id', $id);
 
         if ($update) {

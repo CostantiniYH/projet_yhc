@@ -16,7 +16,7 @@ if ($id) {
        // var_dump(delete($connect, 't_categories', $id, true));
        // exit();
         if (isAdmin()) {
-            header('Location: ' . BASE_URL . 'admin/dashboard_admin.php?success=' . urlencode("categorie $categorieNom supprimé avec succès !"));
+            header('Location: ' . BASE_URL . 'admin/dashboard.php?success=' . urlencode("categorie $categorieNom supprimé avec succès !"));
         } else {
             header('Location: ' . BASE_URL . 'compte/dashboard.php?success=' . urlencode("Votre categorie $categorieNom a été supprimé avec succès !"));
         }

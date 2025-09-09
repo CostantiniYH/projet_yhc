@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update = update($pdo, 't_produits', $data, 'id', $id);
         
         if ($update) {
-            header('Location: ' . BASE_URL . 'admin/dashboard_admin.php?success=Produit modifié avec succès');
+            header('Location: ' . BASE_URL . 'admin/dashboard.php?success=Produit modifié avec succès');
             exit();
         } else {
             echo "Erreur lors de la modification du produit !";
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         insert($pdo,'t_produits', $data);
         
-        header('Location: ' . BASE_URL . 'admin/dashboard_admin.php?success=Produit ajouté avec succès !');
+        header('Location: ' . BASE_URL . 'admin/dashboard.php?success=Produit ajouté avec succès !');
         exit();
     } 
 }

@@ -21,7 +21,7 @@ $connect = connect();
 
 $user = getAll($connect, 't_users');
 $categorie = getAll($connect, 't_categories');
-//$produit = getAll2($connect, 't_produits');
+
 $sql = "SELECT p.*, c.nom AS nom_categorie FROM t_produits p
  INNER JOIN t_categories c ON p.id_categorie = c.id WHERE deleted_at IS NULL";
 $stmt = $connect->prepare($sql);
@@ -40,7 +40,7 @@ $navbar = new Navbar();
     $navbar->AddItem('Catégories liste', 'categories.php', 'dropdown', '', '');   
     $navbar->AddItem('Produits liste', 'produits.php', 'dropdown', '', '');
     $navbar->AddItem('Galerie','image.php','dropdown', '', '');
-    $navbar->AddItem('', 'admin/dashboard_admin.php', 'center', true, 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
+    $navbar->AddItem('', 'admin/dashboard.php', 'center', true, 'bi bi-motherboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau admin');
     $navbar->AddItem('', 'compte/dashboard.php', 'center', '', 'bi bi-kanban" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Tableau de bord');
     $navbar->AddItem('', 'Form/Crud/categorie.php', 'center', '', 'bi bi-grid-3x3-gap-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Gestion des catégories');   
     $navbar->AddItem('', 'Form/Crud/produit.php','center', '', 'bi bi-box-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Ajouter un produit');
@@ -54,8 +54,51 @@ $navbar->render();
 <div class="container mt-2">
     <?php require_once __DIR__ . '/../components/alerts.php'; ?>
 
-    <p class="mt-2 border border-2 border-success p-3 rounded mb-3">Bonjour Administrateur : <?php echo $_SESSION['user']['email']; ?></p>
-    <h1 class="shadow rounded p-4 border-start border-end border-2 border-success">Dashboard admin de : <?php echo $_SESSION['user']['nom']; ?> <?php echo $_SESSION['user']['prenom']; ?></h1>
+    <p class="mt-2 border border-2 border-success p-3 rounded mb-3">Bonjour Administrateur : <?= $_SESSION['user']['email']; ?></p>
+    <h1 class="shadow rounded p-4 border-start border-end border-2 border-success">Dashboard admin de : <?= $_SESSION['user']['nom']; ?> <?php echo $_SESSION['user']['prenom']; ?></h1>
+
+      <?php
+          if (isset($_GET['deploy']) && isset($_SESSION['deploy_result'])) {
+            $result = $_SESSION['deploy_result'];
+            echo '<div style="border:1px solid #ccc;padding:10px;margin:10px 0;background:#f9f9f9">';
+            $alertClass = $result['success'] ? 'alert-success' : 'alert-danger';
+            $title = $result['success'] ? '✅ Déploiement réussi' : '❌ Erreur lors du déploiement';
+
+            echo '<div class="alert ' . $alertClass . ' mt-3">';
+            echo '<h4>' . $title . '</h4>';
+            echo '<pre style="max-height:300px;overflow:auto;">';
+            foreach ($result['log'] as $line) {
+                echo htmlspecialchars($line) . "\n";
+            }
+            echo '</pre>';
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            echo '</div>';
+            echo '</div>';
+            unset($_SESSION['deploy_result']); // nettoyage après affichage
+        }
+
+        if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['REMOTE_ADDR'] === '127.0.0.1') { 
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        ?>
+        <div class="mb-3 p-3 border border-2 border-info rounded shadow text-center">
+            <form method="POST" action="<?= BASE_URL ?>controllers/deploy.php">
+                <h3>Cliquer ici pour lancer le déployer</h3>
+                <label for="remote">Sélectionner un remote :</label>
+                <div class="d-flex col-md-3 mx-auto mt-3 mb-3">
+                    <select class=" mx-auto form-select" name="remote" id="remote" aria-label="Defaullt select example">
+                        <option value="origin">origin</option>
+                        <option value="github">github</option>
+                        <option value="wan">wan</option>
+                        <option value="mobile">mobile</option>
+                    </select>
+                </div>
+                <input type="hidden" name="token" value="<?= $_SESSION['csrf_token'] ?>">
+                <button type="submit" class="btn btn-success bi bi-cloud-arrow-up-fill" > Déployer</button>
+            </form>
+        </div>
+    <?php
+    }
+    ?>
 
     <img class="bandeau rounded-4 shadow" src="<?= $_SESSION['user']['photo']; ?>">
     <div class="d-flex flex-column vh-100 overflow-auto row">    
