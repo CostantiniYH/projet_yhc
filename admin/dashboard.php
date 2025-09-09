@@ -63,29 +63,29 @@ $navbar->render();
     <p class="mt-2 border border-2 border-success p-3 rounded mb-3">Bonjour Administrateur : <?= $_SESSION['user']['email']; ?></p>
     <h1 class="shadow rounded p-4 border-start border-end border-2 border-success">Dashboard admin de : <?= $_SESSION['user']['nom']; ?> <?php echo $_SESSION['user']['prenom']; ?></h1>
 
-      <?php
-          if (isset($_GET['deploy']) && isset($_SESSION['deploy_result'])) {
-            $result = $_SESSION['deploy_result'];
-            echo '<div style="border:1px solid #ccc;padding:10px;margin:10px 0;background:#f9f9f9">';
-            $alertClass = $result['success'] ? 'alert-success' : 'alert-danger';
-            $title = $result['success'] ? '✅ Déploiement réussi' : '❌ Erreur lors du déploiement';
+    <?php
+        if (isset($_GET['deploy']) && isset($_SESSION['deploy_result'])) {
+        $result = $_SESSION['deploy_result'];
+        echo '<div style="border:1px solid #ccc;padding:10px;margin:10px 0;background:#f9f9f9">';
+        $alertClass = $result['success'] ? 'alert-success' : 'alert-danger';
+        $title = $result['success'] ? '✅ Déploiement réussi' : '❌ Erreur lors du déploiement';
 
-            echo '<div class="alert ' . $alertClass . ' mt-3">';
-            echo '<h4>' . $title . '</h4>';
-            echo '<pre style="max-height:300px;overflow:auto;">';
-            foreach ($result['log'] as $line) {
-                echo htmlspecialchars($line) . "\n";
-            }
-            echo '</pre>';
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-            echo '</div>';
-            unset($_SESSION['deploy_result']); // nettoyage après affichage
+        echo '<div class="alert ' . $alertClass . ' mt-3">';
+        echo '<h4>' . $title . '</h4>';
+        echo '<pre style="max-height:300px;overflow:auto;">';
+        foreach ($result['log'] as $line) {
+            echo htmlspecialchars($line) . "\n";
         }
+        echo '</pre>';
+        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+        echo '</div>';
+        echo '</div>';
+        unset($_SESSION['deploy_result']); // nettoyage après affichage
+    }
 
         if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['REMOTE_ADDR'] === '127.0.0.1') { 
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        ?>
+    ?>
         <div class="mb-3 p-3 border border-2 border-info rounded shadow text-center">
             <form method="POST" action="<?= BASE_URL ?>controllers/deploy.php">
                 <h3>Cliquer ici pour lancer le déployer</h3>
@@ -107,132 +107,132 @@ $navbar->render();
     ?>
 
     <img class="bandeau rounded-4 shadow" src="<?= $_SESSION['user']['photo']; ?>">
-    <div class="d-flex flex-column vh-100 overflow-auto row">    
-            <div class="row row-cols row-cols g-3 h-100">
-                    <div class="h-50  mt-5 p-4 rounded-4 shadow border-start border-2 border-danger table-responsive">
-                        <h1 class="fs-2 d-block">Table utilisateurs</h1>    
-                        <table class="table mt-2 w-100">
-                            <tr class="">
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Email</th>
-                                <th>Téléphone</t>
-                                <th>Société</th>   
-                                <th>Action</th>
-                            </tr>
-                            
-                            <?php foreach ($user as $key => $u) { ?> 
-                            <tr class="bi bi">
-                                <td> <?= $u['nom']?> </td>
-                                <td> <?= $u['prenom']?> </td>
-                                <td> <?= $u['email']; ?> </td>
-                                <td> <?= $u['telephone']; ?> </td>
-                                <td> <?= $u['societe']; ?> </td>
-                                <td>
-                                    <a href="#.php?id=<?= $u['id']; ?>" 
-                                        class="btn btn-primary bi bi-eye"></a>
-                                    <a href="<?= BASE_URL ?>Form/Compte/register.php?id=<?= $u['id']; ?>" 
-                                        class="btn btn-warning bi bi-pencil"></a>
-                                    <a href="<?= BASE_URL ?>Controllers/Delete/user.php?id=<?= $u['id']; ?>" 
-                                    class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
-                                </td>
+    <div class="d-flex flex-column row">    
+        <div class="row row-cols row-cols g-3">
+            <div class="mt-5 p-4 rounded-4 shadow border-start border-2 border-danger table-responsive">
+                <h1 class="fs-2 d-block">Table utilisateurs</h1>    
+                <table class="table mt-2 w-100">
+                    <tr class="">
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</t>
+                        <th>Société</th>   
+                        <th>Action</th>
+                    </tr>
+                        
+                    <?php foreach ($user as $key => $u) { ?> 
+                    <tr class="bi bi">
+                        <td> <?= $u['nom']?> </td>
+                        <td> <?= $u['prenom']?> </td>
+                        <td> <?= $u['email']; ?> </td>
+                        <td> <?= $u['telephone']; ?> </td>
+                        <td> <?= $u['societe']; ?> </td>
+                        <td>
+                            <a href="#.php?id=<?= $u['id']; ?>" 
+                                class="btn btn-primary bi bi-eye"></a>
+                            <a href="<?= BASE_URL ?>Form/Compte/register.php?id=<?= $u['id']; ?>" 
+                                class="btn btn-warning bi bi-pencil"></a>
+                            <a href="<?= BASE_URL ?>Controllers/Delete/user.php?id=<?= $u['id']; ?>" 
+                            class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
+                        </td>
 
-                            </tr>
-                            <?php } ?>
-                        </table>
-                    </div>
-                    <div class=" h-50  mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">
-                        <h1 class="fs-2">Table catégories</h1>
-                        <table class="table mt-2 w-100">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom</th>
-                                <th>Image</th>
-                                <th>Action</th>
-                            </tr>
-                            <?php foreach ($categorie as $row => $c) { ?> 
-                                <tr>
-                                    <td><?= $c['id']; ?></td>
-                                    <td><?= $c['nom']; ?></td>
-                                    <td><?= $c['image']; ?></td>
-                                    <td>
+                    </tr>
+                    <?php } ?>
+                </table>
+            </div>
+            <div class=" h-50  mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">
+                <h1 class="fs-2">Table catégories</h1>
+                <table class="table mt-2 w-100">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                    <?php foreach ($categorie as $row => $c) { ?> 
+                        <tr>
+                            <td><?= $c['id']; ?></td>
+                            <td><?= $c['nom']; ?></td>
+                            <td><?= $c['image']; ?></td>
+                            <td>
                                 <a href="<?= BASE_URL ?>produits.php?id=<?= $c['id']; ?>" 
                                     class="btn btn-primary bi bi-eye"></a>
                                 <a href="<?= BASE_URL ?>Form/Crud/categorie.php?id=<?= $c['id']; ?>" 
                                     class="btn btn-warning bi bi-pencil"></a>
                                 <a href="<?= BASE_URL ?>controllers/Delete/categorie.php?id=<?= $c['id']; ?>" 
                                 class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
-                                </td>
-                                </tr>
-                                <?php } ?>
-                        </table>
-                    </div>
-                    <div class=" h-50  mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">
-                        <h1 class="fs-2">Table produits</h1>
-                        <table class="table mt-2 w-100">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom</th>
-                                <th>Prix</th>
-                                <th>Devise</th>
-                                <th>Quantité</th>
-                                <th>Description</th>
-                                <th>Catégorie</th>
-                                <th>Image</th>
-                                <th>User</th>
-                                <th>Action</th>
-                            </tr>
-                            <?php foreach ($produit as $row => $p) { ?> 
-                                <tr>
-                                    <td><?= $p['id']; ?></td>
-                                    <td><?= $p['nom']; ?></td>
-                                    <td><?= $p['prix']; ?></td>
-                                    <td><?= $p['devise']; ?></td>
-                                    <td><?= $p['quantite']; ?></td>
-                                    <td><?= $p['description']; ?></td>
-                                    <td><?= $p['nom_categorie']; ?></td>
-                                    <td><?= $p['image']; ?></td>
-                                    <td><?= $p['id']; ?></td>
-                                    <td>
-                                        <a href="<?= BASE_URL ?>produit_one.php?id=<?= $p['id']; ?>" 
-                                            class="btn btn-primary bi bi-eye"></a>
-                                        <a href="<?= BASE_URL ?>Form/Crud/produit.php?id=<?= $p['id']; ?>" 
-                                            class="btn btn-warning bi bi-pencil"></a>
-                                        <a href="<?= BASE_URL ?>controllers/Delete/produit.php?id=<?= $p['id']; ?>" 
-                                        class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                        </table>
-                    </div>
-                    <div class=" h-50  mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">
-                        <h1 class="fs-2">Table galerie</h1>
-                        <table class="table mt-2 w-100">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom</th>
-                                <th>Image</th>
-                                <th>Catégorie</th>
-                                <th>Action</th>
-                            </tr>
-                            <?php foreach ($image as $row => $i) { ?> 
-                                <tr>
-                                    <td><?= $i['id']; ?></td>
-                                    <td><?= $i['nom']; ?></td>
-                                    <td><?= $i['image']; ?></td>
-                                    <td><?= $i['nom_categorie']; ?></td>
-                                    <td>
-                                        <a href="<?= BASE_URL ?>image.php?id=<?= $i['id']; ?>" 
-                                            class="btn btn-primary bi bi-eye"></a>
-                                        <a href="<?= BASE_URL ?>Form/Crud/image.php?id=<?= $i['id']; ?>" 
-                                            class="btn btn-warning bi bi-pencil"></a>
-                                        <a href="<?= BASE_URL ?>controllers/Delete/image.php?id=<?= $i['id']; ?>" 
-                                        class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                        </table>
-                    </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+            <div class="mt-5 p-4 rounded-4 overflow-auto shadow border-start border-2 border-danger table-
+            responsive" style="max-height: 300px;">
+                <h1 class="fs-2">Table produits</h1>
+                <table class="table mt-2 w-100">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Devise</th>
+                        <th>Quantité</th>
+                        <th>Description</th>
+                        <th>Catégorie</th>
+                        <th>Image</th>
+                        <th>User</th>
+                        <th>Action</th>
+                    </tr>
+                    <?php foreach ($produit as $row => $p) { ?> 
+                        <tr>
+                            <td><?= $p['id']; ?></td>
+                            <td><?= $p['nom']; ?></td>
+                            <td><?= $p['prix']; ?></td>
+                            <td><?= $p['devise']; ?></td>
+                            <td><?= $p['quantite']; ?></td>
+                            <td><?= $p['description']; ?></td>
+                            <td><?= $p['nom_categorie']; ?></td>
+                            <td><?= $p['image']; ?></td>
+                            <td><?= $p['id']; ?></td>
+                            <td>
+                                <a href="<?= BASE_URL ?>produit_one.php?id=<?= $p['id']; ?>" 
+                                    class="btn btn-primary bi bi-eye"></a>
+                                <a href="<?= BASE_URL ?>Form/Crud/produit.php?id=<?= $p['id']; ?>" 
+                                    class="btn btn-warning bi bi-pencil"></a>
+                                <a href="<?= BASE_URL ?>controllers/Delete/produit.php?id=<?= $p['id']; ?>" 
+                                class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+            <div class=" h-50  mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">
+                <h1 class="fs-2">Table galerie</h1>
+                <table class="table mt-2 w-100">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Image</th>
+                        <th>Catégorie</th>
+                        <th>Action</th>
+                    </tr>
+                    <?php foreach ($image as $row => $i) { ?> 
+                        <tr>
+                            <td><?= $i['id']; ?></td>
+                            <td><?= $i['nom']; ?></td>
+                            <td><?= $i['image']; ?></td>
+                            <td><?= $i['nom_categorie']; ?></td>
+                            <td>
+                                <a href="<?= BASE_URL ?>image.php?id=<?= $i['id']; ?>" 
+                                    class="btn btn-primary bi bi-eye"></a>
+                                <a href="<?= BASE_URL ?>Form/Crud/image.php?id=<?= $i['id']; ?>" 
+                                    class="btn btn-warning bi bi-pencil"></a>
+                                <a href="<?= BASE_URL ?>controllers/Delete/image.php?id=<?= $i['id']; ?>" 
+                                class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
             </div>
         </div>
     </div>
