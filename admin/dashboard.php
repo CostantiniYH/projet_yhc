@@ -106,39 +106,67 @@ $navbar->render();
     }
     ?>
 
-    <img class="bandeau rounded-4 shadow" src="<?= $_SESSION['user']['photo']; ?>">
+    <img class="bandeau rounded-4 shadow" src="<?= BASE_URL . $_SESSION['user']['photo']; ?>">
     <div class="d-flex flex-column row">    
         <div class="row row-cols row-cols g-3">
             <div class="mt-5 p-4 rounded-4 shadow border-start border-2 border-danger table-responsive">
                 <h1 class="fs-2 d-block">Table utilisateurs</h1>    
                 <table class="table mt-2 w-100">
-                    <tr class="">
+                    <tr>
+                        <th>ID</th>
+                        <?php foreach ($user as $key => $u) { ?>
+                            <td> <?= $u['id'] ?></td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
                         <th>Nom</th>
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td> <?= $u['nom']?> </td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
                         <th>Prénom</th>
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td> <?= $u['prenom']?> </td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
                         <th>Email</th>
-                        <th>Téléphone</t>
-                        <th>Société</th>   
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td> <?= $u['email']; ?> </td>
+                        <?php } ?>
+                    </tr>
+                    <tr>                        
+                        <th>Téléphone</th>
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td> <?= $u['telephone']; ?> </td>
+                        <?php } ?>
+                    </tr>
+                    <tr>                        
+                        <th>Société</th>  
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td> <?= $u['societe']; ?> </td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
+                        <th>Photo profil</th> 
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td> <img width="100" src="<?= BASE_URL . $u['photo']; ?>"></td>
+                        <?php } ?>
+                    </tr>
+                    <tr>                        
                         <th>Action</th>
+                        <?php foreach ($user as $key => $u) { ?> 
+                            <td>
+                                <a href="#.php?id=<?= $u['id']; ?>" 
+                                    class="btn btn-primary bi bi-eye"></a>
+                                <a href="<?= BASE_URL ?>Form/Compte/register.php?id=<?= $u['id']; ?>" 
+                                    class="btn btn-warning bi bi-pencil"></a>
+                                <a href="<?= BASE_URL ?>Controllers/Delete/user.php?id=<?= $u['id']; ?>" 
+                                class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
+                            </td>
+                        <?php } ?>
                     </tr>
-                        
-                    <?php foreach ($user as $key => $u) { ?> 
-                    <tr class="bi bi">
-                        <td> <?= $u['nom']?> </td>
-                        <td> <?= $u['prenom']?> </td>
-                        <td> <?= $u['email']; ?> </td>
-                        <td> <?= $u['telephone']; ?> </td>
-                        <td> <?= $u['societe']; ?> </td>
-                        <td>
-                            <a href="#.php?id=<?= $u['id']; ?>" 
-                                class="btn btn-primary bi bi-eye"></a>
-                            <a href="<?= BASE_URL ?>Form/Compte/register.php?id=<?= $u['id']; ?>" 
-                                class="btn btn-warning bi bi-pencil"></a>
-                            <a href="<?= BASE_URL ?>Controllers/Delete/user.php?id=<?= $u['id']; ?>" 
-                            class="btn btn-danger bi bi-trash" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')"></a>
-                        </td>
-
-                    </tr>
-                    <?php } ?>
                 </table>
             </div>
             <div class=" h-50  mt-5 p-4 rounded-4 shadow  border-start border-2 border-danger table-responsive">

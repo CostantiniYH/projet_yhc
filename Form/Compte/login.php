@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../class/navbar.php';
 
 $navbar = new Navbar();
 $navbar->AddItem('|| YHC ||','index.php', 'left', '', '');
-$navbar->AddItem('Accueil','index.php','center', '', '');
+    $navbar->AddItem('','index.php', 'center', '', 'bi bi-house-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Accueil');
 $navbar->AddItem('Inscription','Form/Compte/register.php','right', '', '');
 
 $navbar->render() ;

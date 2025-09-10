@@ -34,24 +34,36 @@ $navbar->render();
 <div class="container mt-2">
     <?php require_once __DIR__ . '/../components/alerts.php'; ?>
 
-    <p class="mt-2 border border-2 border-success p-3 rounded mb-3">Vous êtes connecté en tant que <?php echo $user['email']; ?></p>
-    <h1 class="shadow rounded p-4">Dashboard <?php echo $user['nom']; ?> <?php echo $user['prenom']; ?></h1>
+    <p class="mt-2 border border-2 border-success p-3 rounded mb-3">Vous êtes connecté en tant que <?= $user['email']; ?></p>
+    <h1 class="shadow rounded p-4">Dashboard <?= $user['nom']; ?> <?= $user['prenom']; ?></h1>
 
-    <img class="bandeau rounded-4 shadow" src="<?php echo $user['photo']; ?>">
-        <table class="table row mt-2">
-            <tr class="table-header">
+    <img class="bandeau rounded-4 shadow" src="<?= BASE_URL . $user['photo']; ?>">
+    <div class="d-flex row mt-4 shadow rounded border border-1 border-success table-responsive">
+        <table class="table row mt-2 shadow col-md-4 table-responsive">
+            <h3>Vos informations</h3>
+            <tr class="">
                 <th>Nom</th>
-                <th>Prénom</th>
-                <th class="">Email</th>
-                <th class="">Téléphone</t>
-                <th class="">Société</th>                
+                <td> <?= $user['nom']?> </td>
             </tr>
             <tr>
-                <td> <?= $user['nom']?> </td>
+                <th>Prénom</th>
                 <td> <?= $user['prenom']?> </td>
+            </tr>
+            <tr>
+                <th class="">Email</th>
                 <td> <?= $user['email']; ?> </td>
+            </tr>
+            <tr>    
+                <th class="">Téléphone</t>
                 <td> <?= $user['telephone']; ?> </td>
+            </th>
+            <tr>
+                <th class="">Société</th>  
                 <td> <?= $user['societe']; ?> </td>
+            </tr>
+            <tr>
+                <th>Photo profil</th>              
+                <td> <img width="100" class="rounded" src="<?= BASE_URL . $user['photo']; ?>"> </td>
             </tr>
         </table>
     </div>

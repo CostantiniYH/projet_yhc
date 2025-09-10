@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../backend/db_connect.php';
 require_once __DIR__ . '/../../controllers/session.php';
 require_once __DIR__ . '/../../components/header.php';
 require_once __DIR__ . '/../../class/navbar.php';
@@ -16,8 +15,8 @@ if ($id) {
 
 $navbar = new Navbar();
 $navbar->AddItem('|| YHC ||','index.php', 'left', '','');
-$navbar->AddItem('Accueil','index.php','center', '','');
-$navbar->AddItem('Connexion','Form/Compte/login.php','right', '','');
+    $navbar->AddItem('','index.php', 'center', '', 'bi bi-house-fill" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip" title="Accueil');
+$navbar->AddItem('','Form/Compte/login.php','right', '','bi bi-person-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="super-tooltip-right" title="Connexion');
 $navbar->render();
 
 ?>
@@ -29,13 +28,13 @@ $navbar->render();
         rounded-4 border border-1 border-success" enctype="multipart/form-data">
             <h2 class="text-center"><?= $user ? 'Modifier votre profil' : 'Inscription' ?></h2>
             <div class="form-group mb-2">
+                <label for="prenom">Prénom :</label>
+                <input value="<?= htmlspecialchars($user['prenom'] ?? '') ?>" type="text"class="form-control" id="prenom" name="prenom" required>
+            </div>
+            <div class="form-group mb-2">
                 <input type="hidden" name="id"  value="<?= $user['id'] ?? '' ?>">
                 <label for="nom">Nom :</label> 
                 <input value="<?= htmlspecialchars($user['nom'] ?? '') ?>" type="text" class="form-control" id="nom" name="nom" required>
-            </div>
-            <div class="form-group mb-2">
-                <label for="prenom">Prénom :</label>
-                <input value="<?= htmlspecialchars($user['prenom'] ?? '') ?>" type="text"class="form-control" id="prenom" name="prenom" required>
             </div>
             <div class="form-group mb-2">
                 <label for="telephone">Numéro de téléphone :</label>

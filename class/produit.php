@@ -46,8 +46,8 @@ class Produit {
         }
 
         // Validation de la catégorie
-        if (!is_string($this->categorie) || empty($this->categorie)) {
-            $this->errors[] = "La catégorie doit être une chaîne de caractères non vide.";
+        if (empty($this->categorie)) {
+            $this->errors[] = "La catégorie est requise.";
         }
 
         // Validation de la description

@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../backend/db_connect.php';
 require_once __DIR__ . '/../../controllers/session.php';
 
 

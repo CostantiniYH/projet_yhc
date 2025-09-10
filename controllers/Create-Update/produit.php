@@ -13,17 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $quantite = htmlspecialchars($_POST['quantite']);
     $categorie = htmlspecialchars($_POST['categorie']);
     $description = htmlspecialchars($_POST['description']);
-
-    $nom_categorie = 
     
-    $produit = new Produit(
-    $_POST['nom'],
-    $_POST['prix'],
-    $_POST['devise'],
-    $_POST['quantite'],
-    $_POST['categorie'],
-    $_POST['description']
-    );
+    $pdo = connect();
+
+    $N_C = findBy2($pdo, 'nom','t_categories', 'id', $categorie);
+    $nom_categorie = $N_C['nom'];
+   
+    $produit = new Produit($nom, $prix, $devise, $quantite, $categorie, $description);
 
     $upload = new Upload($_FILES['image']);
     if ($upload->validate()) {
@@ -45,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             die("Erreur : le dossier uploads n'est pas inscriptible par PHP !");
         }
   
-        $categorieClean = preg_replace('/[^a-zA-Z0-9_-]/', '_', $_POST['categorie']);
+        $categorieClean = preg_replace('/[^a-zA-Z0-9_-]/', '_', $nom_categorie);
         $categoriePath = $uploadPath . $categorieClean . '/';
         
         if (!is_dir($categoriePath)) {
@@ -65,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $fileName = uniqid('img_') . '.' . $ext;
 
-        $destination = $uploadPath . $categorieClean . '/' . $fileName;
+        $destination = $categoriePath . '/' . $fileName;
 
         if ($upload->moveTo($destination)) {
             echo "Fichier uploadé avec succès ! <br>";
@@ -79,11 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     } 
 
-    $pdo = connect();
-
     $categorieDir = $uploadDir . $categorieClean . '/';
     $imageUrl = $categorieDir . $fileName;
-
     
     $data = [
         'nom' => $produit->getNom(),

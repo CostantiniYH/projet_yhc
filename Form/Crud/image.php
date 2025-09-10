@@ -63,7 +63,7 @@ $navbar->render() ;
             <div class="form-group m-4">
                 <label for="categorie" class="mb-2">Catégorie</label>
                 <select class="form-select" id="categorie" name="categorie">
-                    <option value="<?= htmlspecialchars($produit['id_categorie'] ?? '') ?>"><?= htmlspecialchars($image['nom_categorie'] ?? '') ?> </option>
+                    <option value="<?= htmlspecialchars($image['id_categorie'] ?? '') ?>"><?= htmlspecialchars($image['nom_categorie'] ?? '') ?> </option>
                     <?php                    
                     foreach ($categories as $categorie) : ?>
                     <option value="<?= $categorie['id']; ?>"><?php echo $categorie['nom'] ?? ''; ?></option>
